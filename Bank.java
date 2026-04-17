@@ -75,6 +75,39 @@ class Bank {
         }
         return null;
     }
+   
+    public void deposit(String accNo, double amount){
+        BankAccount acc= findAccount(accNo);
+
+        if (acc == null) {
+            System.out.println("Account Not Found");
+            return;
+        }
+
+        acc.deposit(amount);
+        updateBalance(accNo, acc.balance);
+
+        System.out.println("Deposit Successful!");
+
+    }
+
+    public void withdraw(String accNo, double amount){
+        BankAccount acc= findAccount(accNo);
+
+        if (acc == null) {
+            System.out.println("Account Not Found");
+            return;
+        }
+
+        boolean success= acc.withdraw(amount);
+
+        if (success) {
+            updateBalance(accNo, acc.balance);
+            System.out.println("Withdrawal Suceessful!");
+        }else{
+                System.out.println("Withdrawal Failed");
+            }
+    }
 
     public void transfer(String from, String to, double amount) {
         // BankAccount sender = findAccount(from);
@@ -95,22 +128,20 @@ class Bank {
             return;
         }
 
-        double oldBalance = sender.balance;
+        boolean success = sender.withdraw(amount);
 
-        sender.withdraw(amount);
+        if (success) {
 
-        //if transfer failed duing withdraw
-        if (sender.balance==oldBalance) {
-            System.out.println("Transfer has failed!");
-            return;            
+            receiver.deposit(amount);
+
+            updateBalance(from, sender.balance);
+            updateBalance(to, receiver.balance);
+
+            System.out.println("Transfer successful!");
+
+        } else {
+            System.out.println("Transfer failed.");
         }
-
-        receiver.deposit(amount);
-
-        updateBalance(from, sender.balance);
-        updateBalance(to, receiver.balance);
-
-        System.out.println("Transfer Successful!");
     }
 
     // UPDATE BALANCE

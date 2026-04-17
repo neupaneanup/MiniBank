@@ -10,7 +10,7 @@ public class Main {
         // Sample Accounts
         bank.addAccount(
             new SavingsAccount(
-                "S1001",
+                "S1111",
                 5000,
                 "Ram Sharma",
                 "9811111111",
@@ -20,7 +20,7 @@ public class Main {
 
         bank.addAccount(
             new CurrentAccount(
-                "C1001",
+                "C111",
                 3000,
                 "Sita Rai",
                 "9822222222",
@@ -120,13 +120,15 @@ public class Main {
                 double amt = sc.nextDouble();
                 sc.nextLine();
 
-                BankAccount acc = bank.findAccount(accNo);
+                // BankAccount acc = bank.findAccount(accNo); removed because bank.deposit le nai lookupg garchha
 
-                if (acc != null) {
-                    acc.deposit(amt);
-                } else {
-                    System.out.println("Account not found!");
-                }
+                bank.deposit(accNo, amt);
+
+                // if (acc != null) {
+                //     acc.deposit(amt);
+                // } else {
+                //     System.out.println("Account not found!");
+                // }
 
             } else if (choice == 3) {
 
@@ -137,13 +139,15 @@ public class Main {
                 double amt = sc.nextDouble();
                 sc.nextLine();
 
-                BankAccount acc = bank.findAccount(accNo);
+                bank.withdraw(accNo, amt);
 
-                if (acc != null) {
-                    acc.withdraw(amt);
-                } else {
-                    System.out.println("Account not found!");
-                }
+                // BankAccount acc = bank.findAccount(accNo);
+
+                // if (acc != null) {
+                //     acc.withdraw(amt);
+                // } else {
+                //     System.out.println("Account not found!");
+                // }
 
             } else if (choice == 4) {
 
