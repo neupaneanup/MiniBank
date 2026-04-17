@@ -8,12 +8,15 @@ class SavingsAccount extends BankAccount {
     }
 
     @Override
-    void withdraw(double amount) {
+    boolean withdraw(double amount) {
         if (balance - amount >= minBalance) {
             balance -= amount;
             System.out.println("Savings Withdraw: " + amount);
+            return true;
+
         } else {
             System.out.println("Minimum balance required: " + minBalance);
+            return false;
         }
     }
 

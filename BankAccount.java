@@ -18,7 +18,7 @@ abstract class BankAccount {
     }
 
     // Abstract method (must override)
-    abstract void withdraw(double amount);
+    abstract boolean withdraw(double amount);
 
     // Method Overloading
     public void deposit(double amount) {

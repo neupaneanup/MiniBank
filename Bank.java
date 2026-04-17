@@ -60,7 +60,7 @@ class Bank {
             if (rs.next()) {
                 double balance = rs.getDouble("balance");
                 String type = rs.getString("account_type");
-                String customerName = rs.getString("customerName"); 
+                String customerName = rs.getString("customer_Name"); 
                 String address = rs.getString("address"); 
                 String phone = rs.getString("phone");
 
@@ -95,7 +95,16 @@ class Bank {
             return;
         }
 
+        double oldBalance = sender.balance;
+
         sender.withdraw(amount);
+
+        //if transfer failed duing withdraw
+        if (sender.balance==oldBalance) {
+            System.out.println("Transfer has failed!");
+            return;            
+        }
+
         receiver.deposit(amount);
 
         updateBalance(from, sender.balance);
