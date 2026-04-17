@@ -3,8 +3,8 @@ package MiniBank;
 class CurrentAccount extends BankAccount {
     private final double overdraftLimit = 10000;
 
-    public CurrentAccount(String accNo, double balance) {
-        super(accNo, balance);
+    public CurrentAccount(String accNo, double balance, String customerName, String phone, String address) {
+        super(accNo, balance, customerName, phone, address);
     }
 
     @Override

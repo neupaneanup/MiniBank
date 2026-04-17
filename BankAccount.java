@@ -4,9 +4,17 @@ abstract class BankAccount {
     protected String accountNumber;
     protected double balance;
 
-    public BankAccount(String accNo, double balance) {
+    protected String customerName;
+    protected String phone;
+    protected String address;
+
+    public BankAccount(String accNo, double balance, String customerName, String phone, String address) {
         this.accountNumber = accNo;
         this.balance = balance;
+
+        this.customerName= customerName;
+        this.phone= phone;
+        this.address= address;
     }
 
     // Abstract method (must override)
@@ -26,6 +34,10 @@ abstract class BankAccount {
     public void showDetails() {
         System.out.println("\nAccount Number: " + accountNumber);
         System.out.println("Balance: " + balance);
+
+        System.out.println("Customer Name:" + customerName);
+        System.out.println("Phone Number:"+ phone);
+        System.out.println("Address:"+ address);
     }
 
     public String getAccountNumber() {
