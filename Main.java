@@ -125,11 +125,6 @@ public class Main {
 
                 bank.deposit(accNo, amt);
 
-                // if (acc != null) {
-                //     acc.deposit(amt);
-                // } else {
-                //     System.out.println("Account not found!");
-                // }
 
             } else if (choice == 3) {
 
@@ -142,13 +137,7 @@ public class Main {
 
                 bank.withdraw(accNo, amt);
 
-                // BankAccount acc = bank.findAccount(accNo);
-
-                // if (acc != null) {
-                //     acc.withdraw(amt);
-                // } else {
-                //     System.out.println("Account not found!");
-                // }
+               
 
             } else if (choice == 4) {
 

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 class Bank {
-    //private ArrayList<BankAccount> accounts = new ArrayList<>();
 
     public void addAccount(BankAccount acc) {
        // accounts.add(acc);
@@ -43,12 +42,7 @@ class Bank {
     }
 
     public BankAccount findAccount(String accNo) {
-        // for (BankAccount acc : accounts) {
-        //     if (acc.getAccountNumber().equals(accNo)) {
-        //         return acc;
-        //     }
-        // }
-        // return null;
+       
             String query = "SELECT * FROM accounts WHERE account_number = ?";
         
         try (Connection conn = DatabaseManager.getConnection();
@@ -125,16 +119,7 @@ class Bank {
     }
 
     public void transfer(String from, String to, double amount) {
-        // BankAccount sender = findAccount(from);
-        // BankAccount receiver = findAccount(to);
-
-        // if (sender != null && receiver != null) {
-        //     sender.withdraw(amount);
-        //     receiver.deposit(amount);
-        //     System.out.println("Transfer successful!");
-        // } else {
-        //     System.out.println("Account not found!");
-        // }
+        
         BankAccount sender = findAccount(from);
         BankAccount receiver = findAccount(to);
 
@@ -193,9 +178,7 @@ class Bank {
     
 
     public void showAllAccounts() {
-        // for (BankAccount acc : accounts) {
-        //     acc.showDetails();
-        // }
+      
          String query = "SELECT * FROM accounts";
 
         try (
