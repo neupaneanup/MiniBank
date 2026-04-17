@@ -89,6 +89,13 @@ class Bank {
 
         System.out.println("Deposit Successful!");
 
+        recordTransaction(
+            "Deposit",
+            accNo,
+            null,
+            amount
+                        );
+
     }
 
     public void withdraw(String accNo, double amount){
@@ -103,8 +110,16 @@ class Bank {
 
         if (success) {
             updateBalance(accNo, acc.balance);
+
+            recordTransaction(
+                "Withdraw",
+                accNo,
+                null,
+                amount
+            );
             System.out.println("Withdrawal Suceessful!");
-        }else{
+        }
+        else{
                 System.out.println("Withdrawal Failed");
             }
     }
@@ -136,6 +151,13 @@ class Bank {
 
             updateBalance(from, sender.balance);
             updateBalance(to, receiver.balance);
+
+            recordTransaction(
+                "Transfer",
+                from,
+                to,
+                amount
+            );
 
             System.out.println("Transfer successful!");
 
@@ -221,4 +243,67 @@ class Bank {
             System.out.println(e.getMessage());
         }
     }
+
+
+    //method used to record transaction details in db
+    public void recordTransaction(
+     String type,
+     String from,
+     String to,
+      double amount
+                    ) 
+   {
+
+        String query =
+        "INSERT INTO transactions " +
+        "(transaction_type, from_account, to_account, amount) " +
+        "VALUES (?, ?, ?, ?)";
+
+        try (
+            Connection conn = DatabaseManager.getConnection();
+            PreparedStatement pstmt =
+                conn.prepareStatement(query)
+        ) {
+
+            pstmt.setString(1, type);
+            pstmt.setString(2, from);
+            pstmt.setString(3, to);
+            pstmt.setDouble(4, amount);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void showTransactions() {
+
+    String query =
+    "SELECT * FROM transactions ORDER BY id DESC";
+
+    try (
+        Connection conn = DatabaseManager.getConnection();
+        PreparedStatement pstmt =
+            conn.prepareStatement(query);
+        ResultSet rs =
+            pstmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            System.out.println(
+                rs.getInt("id") + " | " +
+                rs.getString("transaction_type") + " | " +
+                rs.getString("from_account") + " | " +
+                rs.getString("to_account") + " | " +
+                rs.getDouble("amount") + " | " +
+                rs.getTimestamp("transaction_time")
+            );
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
 }

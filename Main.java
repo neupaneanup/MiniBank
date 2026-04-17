@@ -8,25 +8,25 @@ public class Main {
         Bank bank = new Bank();
 
         // Sample Accounts
-        bank.addAccount(
-            new SavingsAccount(
-                "S1111",
-                5000,
-                "Ram Sharma",
-                "9811111111",
-                "Kathmandu"
-            )
-        );
+        // bank.addAccount(
+        //     new SavingsAccount(
+        //         "S1111",
+        //         5000,
+        //         "Ram Sharma",
+        //         "9811111111",
+        //         "Kathmandu"
+        //     )
+        // );
 
-        bank.addAccount(
-            new CurrentAccount(
-                "C111",
-                3000,
-                "Sita Rai",
-                "9822222222",
-                "Lalitpur"
-            )
-        );
+        // bank.addAccount(
+        //     new CurrentAccount(
+        //         "C111",
+        //         3000,
+        //         "Sita Rai",
+        //         "9822222222",
+        //         "Lalitpur"
+        //     )
+        // );
 
         while (true) {
 
@@ -37,7 +37,8 @@ public class Main {
             System.out.println("4. Transfer");
             System.out.println("5. Show One Account");
             System.out.println("6. Show All Accounts");
-            System.out.println("7. Exit");
+            System.out.println("7. Show Transactions");
+            System.out.println("8. Exit");
             System.out.print("Enter Choice: ");
 
             int choice = sc.nextInt();
@@ -181,6 +182,11 @@ public class Main {
                 bank.showAllAccounts();
 
             } else if (choice == 7) {
+
+                bank.showTransactions();
+
+            } 
+            else if (choice == 8) {
 
                 System.out.println("Thank you for using the system.");
                 break;
